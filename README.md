@@ -250,3 +250,13 @@ Add Docker support
 Conclusion
 
 This project demonstrates secure backend development, clean architecture, responsible AI usage, and a practical approach to full-stack application development under real-world constraints.
+## Testing Note
+
+Due to time and environment constraints, full automated test coverage could not be completed for this submission.
+
+However:
+- Core backend logic was manually validated using Postman
+- Authentication, authorization, and JWT flows were tested end-to-end
+- The project structure supports the addition of unit and integration tests without refactoring
+
+Given additional time, unit tests using JUnit and Mockito and integration tests using MockMvc would be added to further improve reliability.
