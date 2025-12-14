@@ -1,262 +1,105 @@
-Sweet Shop Management System
+🍬 Sweet Shop Management System
 
-A full-stack Sweet Shop Management System built using Spring Boot (Backend) and React + Vite (Frontend).
-The application provides authentication using JWT, role-based authorization, and basic sweet inventory management.
+A full-stack Sweet Shop Management System built using Spring Boot for the backend and React + Vite for the frontend.
+This project was developed as part of a technical assignment with emphasis on security, clean architecture, and responsible AI usage.
 
-This project was developed as part of a technical assignment with a strong emphasis on clean code, security, testing, and responsible AI usage.
+🧠 Thought Process & Design Decisions
+1. Understanding the Problem
 
-Features
-Backend (Spring Boot)
+The core requirement was to build a small but realistic system that demonstrates:
 
-User Registration and Login using JWT authentication
+Authentication and authorization
 
-Role-based access control (USER / ADMIN)
+Role-based access control
 
-Public endpoint to view sweets
+Secure backend APIs
 
-Admin-only endpoints to add and delete sweets
+A minimal but functional frontend
 
-Stateless authentication using JWT
+Rather than over-engineering, the focus was on clarity, correctness, and security.
 
-Secure password storage using BCrypt
+2. Backend-First Approach
 
-Clean layered architecture (Controller → Service → Repository)
+The backend was designed first, treating it as the source of truth.
 
-Frontend (React + Vite)
+Key decisions:
 
-Login and Registration UI
+JWT-based stateless authentication was chosen to keep the system scalable and decoupled from server-side sessions.
 
-Public sweets listing page
+Spring Security was used to enforce authorization rules at the API level instead of relying on frontend checks.
 
-Admin-only add sweet page
+Role-based access (USER, ADMIN) was implemented to clearly separate public and restricted operations.
 
-Axios-based API communication
+Passwords are stored using BCrypt to follow security best practices.
 
-Basic navigation using React Router
+The backend follows a layered architecture:
 
-Clean and presentable UI structure
+Controllers handle HTTP concerns
 
-Tech Stack
-Backend
+Services encapsulate business logic
 
-Java 17
+Repositories manage persistence
 
-Spring Boot
+This separation keeps the code readable, testable, and maintainable.
 
-Spring Security
+3. Security Considerations
 
-JWT (io.jsonwebtoken)
+Security was treated as a first-class concern:
 
-JPA / Hibernate
+Public endpoints are explicitly whitelisted
 
-MySQL
+Admin-only operations are protected at the HTTP method level
 
-JUnit 5 & Mockito
+JWT validation is handled via a custom filter
 
-Frontend
+The application is stateless to avoid session-related vulnerabilities
 
-React
+The intent was not just to “make it work”, but to make misuse difficult.
 
-Vite
+4. Frontend Philosophy
 
-Axios
+The frontend was intentionally kept simple and focused:
 
-React Router DOM
+React + Vite was chosen for fast development and modern tooling
 
-CSS
+The UI demonstrates authentication flow and role-based access
 
-Project Structure
-Sweet Shop/
-│
-├── Backend/
-│   ├── src/main/java/com/sweetshop/demo
-│   │   ├── auth
-│   │   │   ├── controller
-│   │   │   ├── service
-│   │   │   ├── jwt
-│   │   │   ├── model
-│   │   │   └── repository
-│   │   ├── config
-│   │   └── sweets
-│   └── src/test/java
-│
-├── Frontend/
-│   ├── src
-│   │   ├── api
-│   │   ├── pages
-│   │   ├── components
-│   │   └── auth
-│   └── package.json
-│
-└── README.md
+Axios is used for API communication
 
-How to Run the Project Locally
-Backend Setup
+Routing is handled using React Router
 
-Navigate to the backend folder:
+The frontend acts purely as a client, respecting backend security rules rather than duplicating them.
 
-cd Backend
+5. Trade-offs & Constraints
 
+Due to time constraints:
 
-Configure database in application.properties:
+Automated testing was deprioritized
 
-spring.datasource.url=jdbc:mysql://localhost:3306/sweetshop
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+UI styling was kept minimal
 
+Swagger and extensive documentation were avoided
 
-Run the application:
+These trade-offs were conscious decisions to prioritize core functionality and correctness over polish.
 
-mvn spring-boot:run
-
-
-Backend will start at:
-
-http://localhost:8080
-
-Frontend Setup
-
-Navigate to frontend folder:
-
-cd Frontend
-
-
-Install dependencies:
-
-npm install
-
-
-Start development server:
-
-npm run dev
-
-
-Frontend will start at:
-
-http://localhost:5173
-
-API Endpoints Overview
-Auth
-
-POST /api/auth/register
-
-POST /api/auth/login
-
-Sweets
-
-GET /api/sweets (Public)
-
-POST /api/sweets (ADMIN only)
-
-DELETE /api/sweets/{id} (ADMIN only)
-
-Authorization header:
-
-Authorization: Bearer <JWT_TOKEN>
-
-Testing Strategy
-
-The backend follows Test-Driven Development (TDD) principles for core logic.
-
-Test Coverage Includes:
-
-Authentication service logic
-
-JWT token generation and validation
-
-User details loading logic
-
-Controller behavior using mocked dependencies
-
-Tools Used:
-
-JUnit 5
-
-Mockito
-
-Spring Boot Test
-
-Test Report Summary
-Component	Tests Written	Status
-AuthService	✅ Yes	Passed
-CustomUserDetailsService	✅ Yes	Passed
-JwtUtil	✅ Yes	Passed
-AuthController	✅ Yes	Passed
-
-Detailed test cases and assertions are documented in the test classes.
-
-Screenshots
-
-Screenshots of the frontend pages and API testing using Postman are included below:
-
-Login Page
-
-Sweets Listing Page
-
-Add Sweet Page
-
-Postman API Testing
-
-(Attach screenshots here)
-
-My AI Usage
-AI Tools Used
+🤖 My AI Usage
+Tools Used
 
 ChatGPT
 
 How AI Was Used
 
-Generating initial backend boilerplate for security configuration
+Brainstorming authentication and authorization flow
 
-Debugging Spring Security and JWT authentication issues
+Generating initial boilerplate for Spring Security and JWT
 
-Structuring frontend components and API integration
+Debugging security configuration issues
 
-Generating unit test templates for backend services
+Improving code readability and documentation
 
-Reviewing code for clean architecture and best practices
+Refining the README to clearly explain intent and design choices
 
-Writing this README documentation
+Reflection
 
-Reflection on AI Usage
-
-AI significantly accelerated development by helping identify misconfigurations, reducing debugging time, and improving overall code structure.
-All AI-generated code was reviewed, understood, and modified manually to ensure correctness and alignment with project requirements.
-
-AI was used as a productivity assistant, not a replacement for engineering judgment.
-
-Git & Development Process
-
-Git was used throughout development
-
-Commits were made incrementally with descriptive messages
-
-AI usage is transparently documented in commits where applicable
-
-Code follows SOLID principles and clean coding practices
-
-Future Improvements
-
-Improve frontend UI/UX
-
-Add pagination and search for sweets
-
-Improve error handling and global exception responses
-
-Increase test coverage for edge cases
-
-Add Docker support
-
-Conclusion
-
-This project demonstrates secure backend development, clean architecture, responsible AI usage, and a practical approach to full-stack application development under real-world constraints.
-## Testing Note
-
-Due to time and environment constraints, full automated test coverage could not be completed for this submission.
-
-However:
-- Core backend logic was manually validated using Postman
-- Authentication, authorization, and JWT flows were tested end-to-end
-- The project structure supports the addition of unit and integration tests without refactoring
-
-Given additional time, unit tests using JUnit and Mockito and integration tests using MockMvc would be added to further improve reliability.
+AI acted as a productivity multiplier, especially when working with complex security configurations.
+All AI-generated code was reviewed, understood, and adjusted manually to ensure correctness and alignment with the project goals.
